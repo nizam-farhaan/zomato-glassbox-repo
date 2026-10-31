@@ -37,7 +37,7 @@ def test_normal_question_is_not_blocked():
 
 
 def test_answer_payload_has_chunks_and_prompt(fake_llm, monkeypatch):
-    fake_chunks = [{"text": "Refund text", "metadata": {"source": "policy"}, "distance": 0.1, "score": 0.95}]
+    fake_chunks = [{"text": "Refund text", "metadata": {"source": "policy"}, "score": 0.95}]
     monkeypatch.setattr(rag, "retrieve", lambda question, k=3: fake_chunks)
 
     result = rag.answer("refund for cold food?")
