@@ -26,7 +26,7 @@ MENU_PATH = ROOT / "data" / "menu.json"
 POLICY_PATH = ROOT / "data" / "policies.md"
 SYSTEM_PROMPT_PATH = ROOT / "prompts" / "system_prompt.txt"
 
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.5-flash"
 
 
 def require_gemini_key() -> str:
