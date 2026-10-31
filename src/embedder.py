@@ -39,7 +39,11 @@ if __name__ == "__main__":
     import sys
 
     sys.stdout.reconfigure(encoding="utf-8")
-    samples = ["Paneer Tikka", "Chicken Tikka", "refund policy"]
+    samples = [
+        "Chunks of cottage cheese marinated in spiced yogurt and grilled in a tandoor, a vegetarian starter.",
+        "Boneless chicken pieces marinated in red chilli, ginger and garlic, then charred in a tandoor.",
+        "Refunds are eligible when an order arrives cold, damaged, or more than 45 minutes late, and must be requested within 24 hours.",
+    ]
     vectors = embed_texts(samples)
     print(f"Embedding size: {len(vectors[0])} numbers per text\n")
     for i in range(len(samples)):
