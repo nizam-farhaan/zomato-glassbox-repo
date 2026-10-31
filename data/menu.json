@@ -1,0 +1,182 @@
+[
+  {
+    "id": "D01",
+    "name": "Paneer Tikka",
+    "category": "Starter",
+    "veg": true,
+    "price": 220,
+    "spice_level": "medium",
+    "description": "Chunks of cottage cheese marinated in spiced yogurt and grilled in a tandoor."
+  },
+  {
+    "id": "D02",
+    "name": "Chicken Tikka",
+    "category": "Starter",
+    "veg": false,
+    "price": 260,
+    "spice_level": "hot",
+    "description": "Boneless chicken pieces marinated in red chilli, ginger and garlic, then charred in a tandoor."
+  },
+  {
+    "id": "D03",
+    "name": "Veg Spring Rolls",
+    "category": "Starter",
+    "veg": true,
+    "price": 150,
+    "spice_level": "mild",
+    "description": "Crisp rolls stuffed with shredded cabbage, carrot and spring onion, served with sweet chilli sauce."
+  },
+  {
+    "id": "D04",
+    "name": "Chilli Chicken",
+    "category": "Starter",
+    "veg": false,
+    "price": 240,
+    "spice_level": "hot",
+    "description": "Crispy chicken tossed in a fiery sauce of green chillies, soy, garlic and bell peppers."
+  },
+  {
+    "id": "D05",
+    "name": "Dal Makhani",
+    "category": "Main Course",
+    "veg": true,
+    "price": 180,
+    "spice_level": "mild",
+    "description": "Black lentils and kidney beans slow-cooked overnight with butter and cream."
+  },
+  {
+    "id": "D06",
+    "name": "Palak Paneer",
+    "category": "Main Course",
+    "veg": true,
+    "price": 210,
+    "spice_level": "medium",
+    "description": "Cubes of cottage cheese simmered in a smooth spinach gravy with mild spices."
+  },
+  {
+    "id": "D07",
+    "name": "Paneer Butter Masala",
+    "category": "Main Course",
+    "veg": true,
+    "price": 230,
+    "spice_level": "mild",
+    "description": "Paneer in a rich, sweet tomato and cashew gravy finished with butter and cream."
+  },
+  {
+    "id": "D08",
+    "name": "Chana Masala",
+    "category": "Main Course",
+    "veg": true,
+    "price": 170,
+    "spice_level": "hot",
+    "description": "Chickpeas cooked in a tangy, spicy onion and tomato gravy with whole garam masala."
+  },
+  {
+    "id": "D09",
+    "name": "Butter Chicken",
+    "category": "Main Course",
+    "veg": false,
+    "price": 280,
+    "spice_level": "mild",
+    "description": "Tandoori chicken pieces in a creamy, buttery tomato gravy."
+  },
+  {
+    "id": "D10",
+    "name": "Chicken Curry",
+    "category": "Main Course",
+    "veg": false,
+    "price": 250,
+    "spice_level": "medium",
+    "description": "Home-style chicken cooked with onion, tomato and a blend of whole and ground spices."
+  },
+  {
+    "id": "D11",
+    "name": "Mutton Rogan Josh",
+    "category": "Main Course",
+    "veg": false,
+    "price": 380,
+    "spice_level": "hot",
+    "description": "Tender mutton pieces slow-cooked in a deep red Kashmiri chilli and yogurt gravy."
+  },
+  {
+    "id": "D12",
+    "name": "Fish Curry",
+    "category": "Main Course",
+    "veg": false,
+    "price": 320,
+    "spice_level": "medium",
+    "description": "Fish fillets simmered in a coconut and kokum gravy with curry leaves and mustard seeds."
+  },
+  {
+    "id": "D13",
+    "name": "Chicken Dum Biryani",
+    "category": "Biryani",
+    "veg": false,
+    "price": 320,
+    "spice_level": "hot",
+    "description": "Basmati rice and marinated chicken layered and slow-cooked in a sealed pot with saffron and fried onions."
+  },
+  {
+    "id": "D14",
+    "name": "Veg Biryani",
+    "category": "Biryani",
+    "veg": true,
+    "price": 240,
+    "spice_level": "medium",
+    "description": "Fragrant basmati rice cooked with seasonal vegetables, mint, saffron and whole spices."
+  },
+  {
+    "id": "D15",
+    "name": "Garlic Naan",
+    "category": "Bread",
+    "veg": true,
+    "price": 100,
+    "spice_level": "mild",
+    "description": "Soft leavened bread from the tandoor, brushed with garlic butter and coriander."
+  },
+  {
+    "id": "D16",
+    "name": "Tandoori Roti",
+    "category": "Bread",
+    "veg": true,
+    "price": 80,
+    "spice_level": "mild",
+    "description": "Whole wheat flatbread baked on the walls of the tandoor."
+  },
+  {
+    "id": "D17",
+    "name": "Gulab Jamun",
+    "category": "Dessert",
+    "veg": true,
+    "price": 120,
+    "spice_level": "mild",
+    "description": "Soft milk-solid dumplings soaked in warm rose and cardamom sugar syrup."
+  },
+  {
+    "id": "D18",
+    "name": "Rasmalai",
+    "category": "Dessert",
+    "veg": true,
+    "price": 140,
+    "spice_level": "mild",
+    "description": "Spongy cottage cheese discs served chilled in sweetened, saffron-scented milk."
+  },
+  {
+    "id": "D19",
+    "name": "Masala Chai",
+    "category": "Beverage",
+    "veg": true,
+    "price": 80,
+    "spice_level": "mild",
+    "description": "Milk tea brewed with ginger, cardamom and cloves."
+  },
+  {
+    "id": "D20",
+    "name": "Mango Lassi",
+    "category": "Beverage",
+    "veg": true,
+    "price": 130,
+    "spice_level": "mild",
+    "description": "Chilled yogurt drink blended with Alphonso mango pulp and a pinch of cardamom."
+  }
+]
