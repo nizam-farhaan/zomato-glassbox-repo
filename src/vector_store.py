@@ -34,17 +34,22 @@ def build_collection(chunks: list[dict]) -> None:
 
 
 def query_collection(query: str, k: int) -> list[dict]:
-    """Return the k closest chunks. Each result has its text, metadata, and Chroma's distance (smaller is closer)."""
+    """Return the k chunks whose embeddings are closest to the question.
+
+    Each result has the chunk's text, its metadata, and its embedding, so the
+    caller can compute cosine similarity itself.
+    """
     collection = _client().get_collection(COLLECTION_NAME)
     result = collection.query(
         query_embeddings=embed_texts([query]),
         n_results=k,
+        include=["documents", "metadatas", "embeddings"],
     )
     matches = []
-    for text, metadata, distance in zip(
-        result["documents"][0], result["metadatas"][0], result["distances"][0]
+    for text, metadata, embedding in zip(
+        result["documents"][0], result["metadatas"][0], result["embeddings"][0]
     ):
-        matches.append({"text": text, "metadata": metadata, "distance": distance})
+        matches.append({"text": text, "metadata": metadata, "embedding": [float(x) for x in embedding]})
     return matches
 
 

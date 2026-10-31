@@ -36,7 +36,7 @@ question ─► injection check ─► retriever (top 3 chunks + scores)
 | `src/chunker.py` | Menu: one chunk per dish. Policies: sentence-aware overlapping chunks |
 | `src/embedder.py` | Local embeddings with `all-MiniLM-L6-v2` (no API key needed) |
 | `src/vector_store.py` | Stores and queries chunks in a local ChromaDB folder |
-| `src/retriever.py` | Returns the top chunks with 0–1 similarity scores |
+| `src/retriever.py` | Returns the top chunks, scored by cosine similarity |
 | `src/llm.py` | The single Gemini call |
 | `src/rag.py` | Injection check, retrieval, prompt, and answer in one place |
 | `src/schema.py` | Pydantic checks for food orders |
@@ -83,7 +83,7 @@ right chunks, with their scores.
 | Question | Without retrieval | With retrieval (top 3, score) |
 |---|---|---|
 | "spicy chicken dish" | Could suggest any chicken dish, with invented prices | Chilli Chicken 0.616, Chicken Tikka 0.590, Butter Chicken 0.517 |
-| "food came cold want refund" | Could invent a refund rule or timeline | Refund Policy 0.619, Refund Policy 0.568, Cancellation Policy 0.465 |
+| "food came cold want refund" | Could invent a refund rule or timeline | Refund Policy 0.625, Refund Policy 0.619, Refund Policy 0.568 |
 | "who won the IPL" | Would answer from general knowledge | Best match is only 0.099, so the assistant replies "I don't know, let me connect you with support." |
 
 ## Tests

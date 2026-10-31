@@ -1,42 +1,38 @@
-"""Finds the stored chunks that best match a question, and reports how confident each match is.
+"""Finds the stored chunks that best match a question, and scores each one with cosine similarity.
 
 Why: retrieval is the "R" in RAG. Students should see which chunks were chosen
-and why, so this module prints a ranked list with a 0-1 score on request.
+and why, so this module prints a ranked list with each chunk's cosine similarity.
 
-Score formula: ChromaDB returns a squared L2 distance. Our embeddings are
-normalized to length 1, so for any two of them
-    distance = |a - b|^2 = 2 - 2 * cos(a, b)
-which means cos = 1 - distance / 2. We report that cosine value as the
-similarity score, so 1.0 means "same meaning" and values near 0 mean "unrelated".
+Cosine similarity measures the angle between two embedding vectors:
+  1.0  -> same direction (same meaning)
+  0.0  -> right angle (unrelated)
+ -1.0  -> opposite direction (opposite meaning)
 """
 
 from src.config import TOP_K
+from src.embedder import cosine_similarity, embed_texts
 from src.vector_store import query_collection
 
 
-def distance_to_similarity(distance: float) -> float:
-    """Convert Chroma's squared L2 distance to a cosine similarity (valid because embeddings are normalized)."""
-    return 1 - distance / 2
-
-
 def retrieve(query: str, k: int = TOP_K, print_debug: bool = False) -> list[dict]:
-    """Return the top-k chunks for `query`, each with a `score` between roughly 0 and 1."""
-    matches = query_collection(query, k)
-    results = [
-        {
-            "text": match["text"],
-            "metadata": match["metadata"],
-            "distance": match["distance"],
-            "score": round(distance_to_similarity(match["distance"]), 3),
-        }
-        for match in matches
-    ]
+    """Return the top-k chunks for `query`, best first, each with a cosine `score`."""
+    question_vector = embed_texts([query])[0]
+    results = []
+    for match in query_collection(query, k):
+        results.append(
+            {
+                "text": match["text"],
+                "metadata": match["metadata"],
+                "score": round(cosine_similarity(question_vector, match["embedding"]), 3),
+            }
+        )
+    results.sort(key=lambda item: item["score"], reverse=True)
 
     if print_debug:
-        print(f"\nQuery: {query!r}  (top {k})")
+        print(f"\nQuery: {query!r}  (top {k}, cosine similarity)")
         for rank, item in enumerate(results, start=1):
             label = item["metadata"].get("name") or item["metadata"].get("section")
-            print(f"  {rank}. score={item['score']:.3f}  [{label}]  {item['text'][:90]}")
+            print(f"  {rank}. cosine={item['score']:.3f}  [{label}]  {item['text'][:90]}")
     return results
 
 
