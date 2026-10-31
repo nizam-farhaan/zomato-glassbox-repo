@@ -5,9 +5,14 @@ each answer shows what the assistant looked at and what it was told, so students
 can check every answer themselves.
 """
 
+import json
+
 import streamlit as st
+from pydantic import ValidationError
 
 from src import rag
+from src.schema import Order
+from src.tools import get_order_status
 
 st.set_page_config(page_title="Zomato Glass-Box RAG", page_icon="🍛")
 st.title("🍛 Zomato Glass-Box Chatbot")
@@ -15,6 +20,34 @@ st.caption("Answers come only from the menu and policy files. Expand 'Under the 
 
 if "history" not in st.session_state:
     st.session_state.history = []
+
+with st.sidebar:
+    st.header("Orders")
+
+    st.subheader("Check order status")
+    order_id = st.text_input("Order ID", placeholder="e.g. ORD1002")
+    if st.button("Check order status") and order_id:
+        st.json(get_order_status(order_id))
+
+    st.subheader("Validate an order")
+    st.caption("Paste an order as JSON. It is checked against the menu before it is accepted.")
+    order_json = st.text_area(
+        "Order JSON",
+        value='{"items": [{"dish_id": "D01", "quantity": 2}], "delivery_address": "12 MG Road"}',
+        height=140,
+    )
+    if st.button("Validate order"):
+        try:
+            order = Order.model_validate(json.loads(order_json))
+        except json.JSONDecodeError as error:
+            st.error(f"Not valid JSON: {error}")
+        except ValidationError as error:
+            st.error("Order rejected:")
+            for problem in error.errors():
+                location = ".".join(str(part) for part in problem["loc"])
+                st.write(f"- `{location}`: {problem['msg']}")
+        else:
+            st.success(f"Order accepted: {len(order.items)} item(s) for {order.delivery_address}")
 
 
 def show_under_the_hood(result: dict) -> None:
