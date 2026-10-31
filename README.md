@@ -95,5 +95,5 @@ these tests call the network or need an API key.
 ## Limitations
 
 - The injection check is a simple phrase list. It catches obvious attempts, not every clever one.
-- The policy overlap is measured in characters. With sentences of about 150 characters and a 50-character overlap, most chunks carry no overlap. This matches the spec, and it is a good discussion point.
+- The policy overlap is measured in characters, and it carries whole sentences only. The overlap is set to 150 characters because a typical sentence is about 90 characters, so a smaller limit would never copy anything. It is a good discussion point: try changing `CHUNK_OVERLAP` in `src/config.py` and watch the chunks change.
 - Order status comes from an in-memory mock, not a real order system.

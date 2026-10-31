@@ -19,7 +19,7 @@ CHROMA_DIR = "chroma_db"
 COLLECTION_NAME = "zomato_menu"
 EMBEDDING_MODEL = "all-MiniLM-L6-v2"
 CHUNK_SIZE = 300  # characters per policy chunk
-CHUNK_OVERLAP = 50  # characters of trailing sentences repeated in the next chunk
+CHUNK_OVERLAP = 150  # characters of trailing sentences repeated in the next chunk (about one sentence)
 TOP_K = 3  # how many chunks to retrieve per question
 
 MENU_PATH = ROOT / "data" / "menu.json"
