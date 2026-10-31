@@ -48,13 +48,24 @@ def query_collection(query: str, k: int) -> list[dict]:
     return matches
 
 
-def inspect() -> None:
-    """Print how many rows are stored and show three sample rows, as proof the data landed."""
+def inspect(numbers_per_line: int = 8) -> None:
+    """Print the row count, then one full sample row: its text, labels, and every number in its embedding."""
     collection = _client().get_collection(COLLECTION_NAME)
-    count = collection.count()
-    print(f"Collection '{COLLECTION_NAME}' has {count} rows.")
-    sample = collection.peek(limit=3)
-    for row_id, text, metadata in zip(sample["ids"], sample["documents"], sample["metadatas"]):
-        print(f"\n  id: {row_id}")
-        print(f"  text: {text[:120]}{'...' if len(text) > 120 else ''}")
-        print(f"  metadata: {metadata}")
+    print(f"Collection '{COLLECTION_NAME}' has {collection.count()} rows.")
+
+    sample = collection.get(limit=1, include=["documents", "metadatas", "embeddings"])
+    row_id = sample["ids"][0]
+    embedding = [float(number) for number in sample["embeddings"][0]]
+
+    print("\nSample row")
+    print("-" * 72)
+    print(f"  id:        {row_id}")
+    print(f"  text:      {sample['documents'][0]}")
+    print(f"  metadata:  {sample['metadatas'][0]}")
+    print(f"\n  embedding: {len(embedding)} numbers, one per dimension (index: value)")
+    for start in range(0, len(embedding), numbers_per_line):
+        chunk = embedding[start : start + numbers_per_line]
+        cells = "  ".join(f"{start + offset:>3}: {value:+.4f}" for offset, value in enumerate(chunk))
+        print(f"    {cells}")
+    print("-" * 72)
+    print("  Each number is one coordinate of the chunk's meaning. Similar chunks have similar numbers.")
